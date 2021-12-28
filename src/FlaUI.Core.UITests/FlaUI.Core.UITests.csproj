@@ -68,6 +68,7 @@
     <Compile Include="KeyboardTests.cs" />
     <Compile Include="MouseTests.cs" />
     <Compile Include="NotepadTests.cs" />
+    <Compile Include="Notepad\NotepadTest.cs" />
     <Compile Include="Patterns\AnnotationPatternTests.cs" />
     <Compile Include="Patterns\DockPatternTests.cs" />
     <Compile Include="Patterns\DragPatternTests.cs" />

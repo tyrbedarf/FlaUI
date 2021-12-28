@@ -8,6 +8,7 @@ using FlaUI.Core.Definitions;
 using FlaUI.Core.Logging;
 using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
+using System.Threading;
 
 namespace FlaUI.Core
 {
@@ -291,6 +292,20 @@ namespace FlaUI.Core
                 _process.Dispose();
                 _process = FindProcess(processId);
                 return _process.MainWindowHandle == IntPtr.Zero;
+            }, waitTime, TimeSpan.FromMilliseconds(50)).Result;
+        }
+
+        public bool WaitWhileMainHandleIsMissing(CancellationToken cancel, int waitTimeout = -1)
+        {
+            var waitTime = TimeSpan.FromMilliseconds(waitTimeout);
+            return Retry.WhileTrue(() =>
+            {
+                int processId = _process.Id;
+                _process.Dispose();
+                _process = FindProcess(processId);
+                return 
+                    _process.MainWindowHandle == IntPtr.Zero &&
+                    !cancel.IsCancellationRequested;
             }, waitTime, TimeSpan.FromMilliseconds(50)).Result;
         }
 

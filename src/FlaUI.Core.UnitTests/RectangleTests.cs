@@ -7,7 +7,7 @@ namespace FlaUI.Core.UnitTests
     [TestFixture]
     public class RectangleTests
     {
-        [Test]
+        [Test] 
         public void EmptyTest()
         {
             var rectangle = new Rectangle(0, 0, 0, 0);
